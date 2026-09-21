@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAG 优先级抢占调度器</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>DAG 优先级抢占调度器</h1>
+          <p>Web Worker 模拟调度，Canvas 绘制依赖、状态、Gantt 与资源持有关系。</p>
+        </div>
+        <div class="clock">
+          <span>TICK</span>
+          <strong id="tickValue">0</strong>
+        </div>
+      </header>
+
+      <section class="toolbar" aria-label="控制面板">
+        <select id="scenarioSelect" aria-label="选择场景"></select>
+        <button id="resetBtn" type="button">重置</button>
+        <button id="stepBtn" type="button">单步</button>
+        <button id="playBtn" type="button">播放</button>
+        <label class="speed-control">
+          速度
+          <input id="speedRange" type="range" min="120" max="1200" value="520" step="80" />
+          <span id="speedValue">520ms</span>
+        </label>
+        <label class="file-control">
+          导入场景
+          <input id="scenarioFile" type="file" accept="application/json,.json" />
+        </label>
+      </section>
+
+      <section class="status-grid" aria-label="调度指标">
+        <article><span>已完成</span><strong id="completedCount">0</strong></article>
+        <article><span>运行中/就绪</span><strong id="activeCount">0</strong></article>
+        <article><span>阻塞/死锁</span><strong id="blockedCount">0</strong></article>
+        <article><span>失败/跳过</span><strong id="failedCount">0</strong></article>
+      </section>
+
+      <section class="canvas-grid">
+        <article class="panel canvas-panel dag-panel">
+          <div class="panel-header">
+            <h2>依赖 DAG 与实时状态</h2>
+            <p>实线为依赖，虚线为资源等待，红环表示死锁环。</p>
+          </div>
+          <canvas id="dagCanvas"></canvas>
+        </article>
+        <article class="panel canvas-panel gantt-panel">
+          <div class="panel-header">
+            <h2>CPU Gantt 与时间片</h2>
+            <p>颜色按任务区分，深色分段表示抢占或时间片切换。</p>
+          </div>
+          <canvas id="ganttCanvas"></canvas>
+        </article>
+      </section>
+
+      <section class="lower-grid">
+        <article class="panel">
+          <h2>任务与资源</h2>
+          <div id="taskTable" class="task-table"></div>
+        </article>
+        <article class="panel">
+          <h2>调度事件 / 异常链路</h2>
+          <ol id="eventLog" class="event-log"></ol>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

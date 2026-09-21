@@ -1,0 +1,11 @@
+{
+  "name": "dag-priority-scheduler",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Priority, preemption, time slice, DAG, timeout and retry scheduler with Canvas visualization.",
+  "scripts": {
+    "test": "node --test",
+    "start": "python3 -m http.server 5173"
+  }
+}

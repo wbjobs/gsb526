@@ -1,0 +1,54 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 1080px; background: linear-gradient(135deg, #eef2ff, #e0f2fe 55%, #f8fafc); }
+.app-shell { width: min(1500px, calc(100vw - 36px)); margin: 0 auto; padding: 24px 0 36px; }
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 18px; }
+h1 { margin: 0 0 6px; font-size: 28px; letter-spacing: -.04em; }
+.topbar p { margin: 0; color: #475569; }
+.clock { min-width: 104px; padding: 12px 18px; border-radius: 18px; background: #0f172a; color: white; text-align: center; box-shadow: 0 16px 36px rgba(15,23,42,.18); }
+.clock span { display: block; font-size: 11px; color: #94a3b8; }
+.clock strong { font-size: 30px; line-height: 1; }
+.toolbar { display: flex; gap: 10px; align-items: center; padding: 12px; margin-bottom: 14px; border: 1px solid rgba(148,163,184,.35); border-radius: 18px; background: rgba(255,255,255,.78); backdrop-filter: blur(12px); }
+button, select, input[type="file"]::file-selector-button { border: 0; border-radius: 11px; padding: 9px 14px; background: #0f172a; color: white; font-weight: 700; cursor: pointer; }
+button:hover, select:hover { filter: brightness(1.12); }
+select { background: #1e293b; min-width: 320px; text-align: left; }
+.speed-control, .file-control { display: flex; gap: 8px; align-items: center; color: #475569; font-size: 13px; font-weight: 700; }
+input[type="range"] { width: 150px; accent-color: #2563eb; }
+.status-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+.status-grid article { padding: 16px; border-radius: 18px; background: rgba(255,255,255,.82); border: 1px solid rgba(148,163,184,.28); box-shadow: 0 10px 28px rgba(15,23,42,.06); }
+.status-grid span { display: block; color: #64748b; font-size: 12px; margin-bottom: 4px; }
+.status-grid strong { font-size: 24px; }
+.canvas-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; margin-bottom: 14px; }
+.lower-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.panel { border: 1px solid rgba(148,163,184,.32); border-radius: 20px; background: rgba(255,255,255,.86); box-shadow: 0 16px 40px rgba(15,23,42,.08); overflow: hidden; }
+.panel h2 { margin: 0; font-size: 16px; }
+.panel-header { padding: 16px 18px 8px; }
+.panel-header p { margin: 5px 0 0; color: #64748b; font-size: 12px; }
+.canvas-panel { padding-bottom: 10px; }
+canvas { display: block; width: 100%; }
+#dagCanvas { height: 520px; }
+#ganttCanvas { height: 520px; }
+.lower-grid .panel { padding: 16px 18px; min-height: 300px; }
+.task-table { display: flex; flex-direction: column; gap: 6px; max-height: 270px; overflow: auto; padding-right: 4px; }
+.task-row { display: grid; grid-template-columns: 18px 58px 112px 108px 76px 76px 1fr 1fr; gap: 8px; align-items: center; padding: 8px; border-radius: 12px; background: #f8fafc; font-size: 12px; }
+.task-row:not(.table-head):hover { background: #eef6ff; }
+.task-row.running { outline: 2px solid #22c55e; background: #f0fdf4; }
+.table-head { position: sticky; top: 0; z-index: 1; background: #e2e8f0; font-weight: 800; }
+.state-dot { width: 10px; height: 10px; border-radius: 999px; background: var(--dot); box-shadow: 0 0 0 3px color-mix(in srgb, var(--dot) 18%, transparent); }
+.state-name { font-weight: 800; color: #334155; }
+.task-row em { color: #64748b; font-style: normal; }
+.event-log { list-style: none; margin: 0; padding: 0; max-height: 270px; overflow: auto; display: flex; flex-direction: column; gap: 7px; }
+.event { display: grid; grid-template-columns: 52px 1fr; gap: 8px; align-items: start; padding: 9px 10px; border-radius: 12px; font-size: 12px; background: #f8fafc; border-left: 4px solid #94a3b8; }
+.event time { color: #64748b; font-weight: 800; }
+.event.warning { border-left-color: #f59e0b; background: #fffbeb; }
+.event.danger { border-left-color: #dc2626; background: #fef2f2; }
+.event.success { border-left-color: #16a34a; background: #f0fdf4; }
+@media (max-width: 1200px) {
+  .canvas-grid, .lower-grid { grid-template-columns: 1fr; }
+}
