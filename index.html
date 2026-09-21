@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>任务调度器可视化</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>任务调度器
+    <small>优先级 · 抢占 · 时间片 · 依赖 DAG · 超时重试 · 死锁检测 · 优先级继承</small>
+  </h1>
+  <div class="controls">
+    <button id="btnStart">▶ 开始</button>
+    <button id="btnPause" disabled>⏸ 暂停</button>
+    <button id="btnStep">⏭ 单步</button>
+    <button id="btnReset">↺ 重置</button>
+    <label>速度 <input id="speed" type="range" min="1" max="20" value="5"> <span id="speedVal">5</span> tick/s</label>
+    <label>核心数
+      <select id="cores">
+        <option value="1">1</option>
+        <option value="2" selected>2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+    </label>
+    <label><input id="chkInherit" type="checkbox" checked> 优先级继承</label>
+    <label><input id="chkDeadlock" type="checkbox"> 注入死锁 (K↔L)</label>
+  </div>
+</header>
+
+<main>
+  <section class="panel wide">
+    <h2>调度时间线（Gantt）</h2>
+    <div class="gantt-scroll" id="ganttScroll"><canvas id="gantt"></canvas></div>
+    <div id="statusBar"></div>
+  </section>
+
+  <section class="panel">
+    <h2>依赖 DAG</h2>
+    <canvas id="dag" width="960" height="400"></canvas>
+    <div class="legend">
+      <span><i style="background:#5a5f6a"></i>等待依赖</span>
+      <span><i style="background:#2196f3"></i>就绪</span>
+      <span><i style="background:#4caf50"></i>运行</span>
+      <span><i style="background:#00897b"></i>完成</span>
+      <span><i style="background:#e53935"></i>失败</span>
+      <span><i style="background:#ff5722"></i>死锁</span>
+      <span><i class="ring"></i>进度环</span>
+      <span><i class="boost"></i>优先级继承</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>任务状态</h2>
+    <table id="taskTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>名称</th><th>状态</th><th>优先级</th><th>进度</th>
+          <th>剩余</th><th>时间片</th><th>重试</th><th>依赖</th>
+        </tr>
+      </thead>
+      <tbody id="taskRows"></tbody>
+    </table>
+  </section>
+
+  <section class="panel wide">
+    <h2>事件日志</h2>
+    <div id="eventLog"></div>
+  </section>
+</main>
+
+<script src="scenario.js"></script>
+<script src="scheduler.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
